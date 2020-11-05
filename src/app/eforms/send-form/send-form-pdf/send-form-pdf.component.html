@@ -1,0 +1,19 @@
+<div  #pdfContainer 
+    id="pdfContainer" 
+    class="pdfContainer" >
+
+<!-- FormControls -->
+    <app-eform-form-group [form]="formDetails" [status]="status"></app-eform-form-group>
+
+<!-- PDF -->
+    <div>
+        <pdf-viewer 
+            [src]="formService.pdfSource" 
+            style="display: block;"
+            [zoom]="1.2"
+            (page-rendered)="reLocateReferencePoint()"
+            (after-load-complete)="onPdfLoaded($event)"
+        ></pdf-viewer>
+    </div>   
+</div>
+

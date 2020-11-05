@@ -1,0 +1,62 @@
+
+
+
+
+
+/* TABLE + Loading spinner */
+
+/* Structure */
+.example-container {
+    position: relative;
+    width: 100%;
+  }
+  
+  .example-table-container {
+    position: relative;
+    max-height: 400px;
+    overflow: auto;
+    width: 100%;
+  }
+  
+  table {
+    width: 100%;
+    overflow: auto;
+    max-height: 700px;
+    min-width: 720px;
+  }
+  
+  .example-rate-limit-reached {
+    color: #980000;
+    max-width: 360px;
+    text-align: center;
+  }
+  
+  /* Column Widths */
+  .mat-column-number,
+  .mat-column-state {
+    max-width: 64px;
+  }
+  
+  .mat-column-created {
+    max-width: 124px;
+  }
+  
+  th.mat-header-cell,td.mat-header-cell  {
+    text-align: right;
+    padding: 0 5px;
+  }
+  
+  td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {
+      padding-right: 24px;
+  }
+  
+  .mat-form-field {
+      font-size: 14px;
+      flex-grow: 1;
+      margin-left: 32px;
+  }
+  
+  .navpage>div{
+    text-align: left;
+  }
+ 

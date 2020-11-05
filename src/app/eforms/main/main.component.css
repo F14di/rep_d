@@ -1,0 +1,9 @@
+
+  mat-drawer-content {
+    min-height:400px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  

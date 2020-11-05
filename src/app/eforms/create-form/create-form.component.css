@@ -1,0 +1,31 @@
+
+
+@media only screen and (max-width: 800px) {
+    .inputSettings__toolbar {
+        display: none;
+    }
+  }
+
+.inputSettings__toolbar{
+    position:absolute;
+    z-index: 100;
+    top:20px
+}
+
+.input__field{
+    position:absolute;
+    background-color: rgba(140, 151, 250, 0.7);
+    z-index:1
+}
+
+#pdfFormContainer{
+    overflow-y:auto;
+    overflow-x: hidden;
+    min-height:400px;
+    max-height:400px;
+    border:1px dashed gray;
+    /* height:80px; */
+    direction: ltr;
+    position:relative;
+    user-select: none;
+}

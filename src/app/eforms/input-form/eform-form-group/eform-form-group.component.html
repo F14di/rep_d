@@ -1,0 +1,134 @@
+
+    <!-- FormControls -->
+    <div >
+    <form [formGroup]="form" >
+        <div formArrayName="inputs" *ngFor="let input of inputs.controls; let i=index; trackBy: trackByFn" >
+            <div [formGroupName]="i">
+            <div [ngSwitch]="input.value.type">
+
+                <!-- TEXTFIELD -->
+                <ng-container *ngSwitchCase="'text'">
+                    <app-eform-input-field [input]="input" [i]="i" [form]="form" [ngSwitch]="status"  (click)="selecInput(i)"> 
+
+                        <div *ngSwitchCase="'create'" style="border:1px solid;"  
+                            cdkDrag cdkDragBoundary="#pdfFormContainer"  (cdkDragEnded)="onDragEnd($event, input)"   
+                            [ngStyle]="{'width':input.value.width+'px','min-width':inputsMinDim.text.width+'px', 'height':input.value.height+'px', 'min-height':inputsMinDim.text.height+'px'}"  class="input__field" >
+
+                            <app-resize-arrows [input]="input" *ngIf="serviceCreate.selectedInput?.value.inputBaseArrayIndex == i"></app-resize-arrows>
+
+                            <small>{{input.value.value}}</small>
+                        </div>
+
+                        
+                        <div *ngSwitchCase="'send'"  >
+                            <input formControlName="value">
+                        </div>
+                        
+                        <div *ngSwitchCase="'read'">
+                            <small>{{input.value.value}}</small>
+                        </div>
+
+                    </app-eform-input-field>
+                </ng-container>
+            
+                <!-- DATE -->
+                <ng-container *ngSwitchCase="'date'">
+                    <app-eform-input-field [input]="input" [i]="i" [form]="form" [ngSwitch]="status"  (click)="selecInput(i)">
+
+                        <div *ngSwitchCase="'create'" style="border:1px solid" 
+                            cdkDrag cdkDragBoundary="#pdfFormContainer"  (cdkDragEnded)="onDragEnd($event, input)"   
+                            [ngStyle]="{'width':input.value.width+'px','min-width':inputsMinDim.date.width+'px', 'height':input.value.height+'px', 'min-height':inputsMinDim.date.height+'px'}" class="input__field">
+                            <app-resize-arrows [input]="input" *ngIf="serviceCreate.selectedInput?.value.inputBaseArrayIndex == i"></app-resize-arrows>
+                            <input type="date" disabled >
+                        </div>
+
+
+                        <div *ngSwitchCase="'send'"  >
+                            <input type="date" formControlName="value">
+                        </div>
+                        
+                        <div *ngSwitchCase="'read'">
+                            <small>{{input.value.value}}</small>
+                        </div>
+
+                    </app-eform-input-field>
+                </ng-container>
+
+                <!-- SIGNATURE -->
+                <ng-container *ngSwitchCase="'signature'">
+                    <app-eform-input-field [input]="input" [i]="i" [form]="form" [ngSwitch]="status"  (click)="selecInput(i)">
+                        
+                        <div *ngSwitchCase="'create'" style="border:1px solid" 
+                            cdkDrag cdkDragBoundary="#pdfFormContainer"  (cdkDragEnded)="onDragEnd($event, input)"   
+                            [ngStyle]="{'width':input.value.width+'px','min-width':inputsMinDim.signature.width+'px', 'height':input.value.height+'px', 'min-height':inputsMinDim.signature.height+'px'}"  >
+                            <app-resize-arrows [input]="input" *ngIf="serviceCreate.selectedInput?.value.inputBaseArrayIndex == i"></app-resize-arrows>
+                            <div class="input__field"></div>
+                        </div>
+                        
+                        <div *ngSwitchCase="'send'"  style="border:1px solid" [ngStyle]="{'width':input.value.width+'px', 'min-height':input.value.height+'px'}">
+                            <div class="input__field"></div>
+                        </div>
+                        
+                        <div *ngSwitchCase="'read'"  style="border:1px solid" [ngStyle]="{'width':input.value.width+'px', 'min-height':input.value.height+'px'}">
+                            <div class="input__field"></div>
+                        </div>
+
+                    </app-eform-input-field>
+                </ng-container>
+            
+                <!-- CHECKBOX -->
+                <ng-container *ngSwitchCase="'checkbox'">
+                    <app-eform-input-field [input]="input" [i]="i" [form]="form" [ngSwitch]="status" (click)="selecInput(i)" >
+
+                            <div  *ngSwitchCase="'create'" 
+                                class="input__field"
+                                cdkDrag cdkDragBoundary="#pdfFormContainer"  (cdkDragEnded)="onDragEnd($event, input)"   
+                                style="border:1px solid"  >
+                                <input type="checkbox" formControlName="value">
+                            </div>
+
+                            <div *ngSwitchCase="'send'"  >
+                                <input type="checkbox" formControlName="value">
+                            </div>
+                            
+                            <div *ngSwitchCase="'read'">
+                                <small>✔</small>
+                            </div>
+
+                    </app-eform-input-field>
+                </ng-container>
+
+                <!-- TEXTAREA -->
+                <ng-container *ngSwitchCase="'textarea'">
+                    <app-eform-input-field [input]="input" [i]="i" [form]="form" [ngSwitch]="status"  (click)="selecInput(i)">
+
+                        <div *ngSwitchCase="'create'" style="border:1px solid" 
+                            cdkDrag cdkDragBoundary="#pdfFormContainer"  (cdkDragEnded)="onDragEnd($event, input)"  
+                            [ngStyle]="{'width':input.value.width+'px','min-width':inputsMinDim.textarea.width+'px', 'height':input.value.height+'px', 'min-height':inputsMinDim.textarea.height+'px'}" class="input__field">
+                            <app-resize-arrows [input]="input" *ngIf="serviceCreate.selectedInput?.value.inputBaseArrayIndex == i"></app-resize-arrows>
+
+                            <small>{{input.value.value}}</small>
+                        </div>
+                        
+                        <div *ngSwitchCase="'send'"  >
+                            <textarea formControlName="value"></textarea>
+                        </div>
+                        
+                        <div *ngSwitchCase="'read'">
+                            <small>{{input.value.value}}</small>
+                        </div>
+
+
+                    </app-eform-input-field>
+                </ng-container>
+
+            </div>
+
+        </div>
+        </div>
+
+    </form>
+
+    
+    </div>
+    

@@ -1,0 +1,70 @@
+<button mat-button (click)='print()'>printMe</button>
+
+  <mat-horizontal-stepper #stepper  dir="rtl" style="padding:0px; ">
+      <mat-step [stepControl]="formDetails">
+          <ng-template matStepLabel>Send</ng-template>
+
+          <!-- The first step. which includes the PDF file (view) + the inputs -->
+          <app-send-form-pdf [formDetails]="formDetails" [status]="FORM_STATUS.SEND"></app-send-form-pdf>
+
+          <div style="display: flex; justify-content:flex-end;">
+            <button mat-flat-button color="primary" matStepperNext>הבא</button>
+          </div>
+          
+      </mat-step>
+      <mat-step [stepControl]="formDetails">
+        <ng-template matStepLabel>Recipiets</ng-template>
+
+        <mat-card>
+          <form [formGroup]="formDetails">
+          <ng-container formArrayName="recipients">
+            <h4 style="text-align: right;">נמענים</h4>
+            
+            <div *ngFor="let recipient of recipients.controls; let i=index" style="margin:15px 0">
+              <div [formGroupName]="i" style="display: flex;justify-content: space-evenly;">
+
+                <mat-form-field style="text-align: center; margin:0 4px;">
+                  <input matInput formControlName="name" placeholder='שם הנמען'/>
+                  <mat-icon matSuffix>perm_identity</mat-icon>
+                </mat-form-field> 
+                
+                <mat-radio-group formControlName="contact_method" style="display: flex; flex-direction:column;">
+                  <mat-radio-button value="email">דוא"ל</mat-radio-button>
+                  <mat-radio-button value="phone">נייד</mat-radio-button>
+                </mat-radio-group> 
+        
+                <mat-form-field style="text-align: center; margin:0 4px;">
+                  <input matInput formControlName="contact_value" placeholder='דוא"ל'/>
+                  <mat-icon matSuffix>alternate_email</mat-icon>
+              </mat-form-field>
+
+              <mat-form-field style="text-align: center; margin:0 4px;">
+                  <input matInput formControlName="external_id" placeholder='מזהה חיצוני'/>
+              </mat-form-field> 
+                   
+                  </div>
+              </div>
+
+
+          </ng-container>
+        </form>
+      </mat-card>
+
+      </mat-step>
+
+
+
+      <mat-step>
+          
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+          <button mat-button (click)="submit()">סיום</button>
+        </div>
+
+      </mat-step>
+
+
+  </mat-horizontal-stepper>

@@ -1,0 +1,28 @@
+<mat-drawer-container hasBackdrop=true style="height:auto">
+    
+    <mat-drawer #drawer mode="over">
+
+        <mat-icon 
+        (click)="drawer.toggle()"
+        style="cursor: pointer; margin:4px">clear</mat-icon>
+
+        <div style="display: flex; flex-direction:column;">
+            <a routerLink="records" mat-button (click)="drawer.close()">טפסים שנשלחו</a>
+            <a routerLink="forms" mat-button (click)="drawer.close()">טפסים דיגיטליים</a>
+            <a routerLink="upload" mat-button (click)="drawer.close()">העלאת טפסים</a>
+        </div>
+    </mat-drawer>
+
+    <mat-drawer-content style="padding:0">
+        <mat-icon style="position:absolute; cursor: pointer;"
+            (click)="drawer.toggle()">menu</mat-icon>
+
+            <div style="width:100%;">
+                <mat-card style="direction: rtl; margin-top:35px; padding:0">
+                    <router-outlet></router-outlet>
+                </mat-card>
+            </div>
+
+    </mat-drawer-content>
+  </mat-drawer-container>
+  

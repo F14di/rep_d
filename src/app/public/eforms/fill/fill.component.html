@@ -1,0 +1,5 @@
+<!-- <signature-pad #signaturePad  [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad> -->
+
+<button mat-button (click)="printer()">printme</button>
+<app-send-form-pdf [formDetails]="formDetails" [status]="FORM_STATUS.SEND"></app-send-form-pdf>
+

@@ -1,0 +1,51 @@
+
+
+<mat-card-subtitle style="text-align: right">Forms - קבצים</mat-card-subtitle>
+<!-- <div style="display:flex; justify-content:flex-end">
+  <button mat-stroked-button 
+    style="padding-left:6px; margin-bottom:4px;" 
+    (click)="onUploadFile()"
+    color="primary" >טופס חדש <mat-icon>add</mat-icon>
+  </button>
+</div> -->
+
+<div class="example-container mat-elevation-z8">
+  
+  <div class="example-loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner></mat-spinner>
+  </div>
+  
+    <div class="example-table-container">
+  
+      <table mat-table [dataSource]="data" class="example-table"
+             matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
+
+        <!-- title Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef>כותרת</th>
+          <td mat-cell *matCellDef="let row">{{row.title}}</td>
+        </ng-container>
+  
+        <!-- Created Column -->
+        <ng-container matColumnDef="created">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>תאריך יצירה</th>
+          <td mat-cell *matCellDef="let row">{{row.created_at | date:'d-M-y'}}</td>
+        </ng-container>
+
+        <!-- actions Column -->
+        <!-- <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>--</th>
+          <td mat-cell *matCellDef="let row">
+            <mat-icon class="pointer" [routerLink]="['../','update-form', row._id]">edit</mat-icon>
+            <mat-icon style="transform: rotate(180deg);" [routerLink]="['../','send-form', row._id]" class="pointer" (click)="onSendForm(row)">send</mat-icon>
+          </td>
+        </ng-container> -->
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        
+      </table>
+    </div>
+  
+    <mat-paginator [length]="resultsLength" [pageSize]="30"></mat-paginator>
+</div>

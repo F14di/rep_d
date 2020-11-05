@@ -1,0 +1,85 @@
+
+<mat-card style="display:flex; justify-content:flex-end">
+
+  <!-- Input Type Menu -->
+    <div style="border:1px solid black">
+        <mat-list>
+            <mat-list-item style="height: 36px;" 
+            *ngFor="let inputType of serviceCreate.inputTypes; let i=index" 
+            [ngStyle]="{'background-color':inputTypeSelected?.type===inputType.type ? '#aeaeae':'white'}"
+              (click)="selectInputType(i)" >
+              <mat-icon matListIcon>{{inputType.icon}}</mat-icon>
+              <h3 matLine>{{inputType.type_he}}</h3>
+            </mat-list-item>
+          </mat-list>
+    </div>
+    
+    <div style="border:1px solid black; padding:8px;" *ngIf="serviceCreate.selectedInput"  >
+
+      <form [formGroup]="serviceCreate.selectedInput">
+          <tr>
+            <td style="text-align:left">
+            <mat-icon appHover highlight="red" defaultColor='rgb(128,128,128)' class="pointer" style="font-size: 20px;" (click)="deleteOpenedInput()">delete</mat-icon>
+            <mat-icon appHover highlight="#673ab7" defaultColor='rgb(128,128,128)' class="pointer" style="font-size: 20px;" (click)="exitToolbar()">clear</mat-icon>
+          </td>
+        </tr>
+        <td style="text-align: center;">
+          <mat-button-toggle-group formControlName="alignment"  name="alignment"  appearance="legacy" style="height:30px;" matTooltip="יישור">
+            <mat-button-toggle value="right" ><mat-icon style="color:black; font-size:18px">format_align_right</mat-icon></mat-button-toggle>
+            <mat-button-toggle value="center" ><mat-icon style="color:black; font-size:18px">format_align_center</mat-icon></mat-button-toggle>
+            <mat-button-toggle value="left" ><mat-icon style="color:black; font-size:18px">format_align_left</mat-icon></mat-button-toggle>
+          </mat-button-toggle-group>
+        </td>
+        <div>
+          <mat-form-field>
+            <mat-label>label</mat-label>
+            <input matInput formControlName="label" matTooltip="שם שדה">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label>value</mat-label>
+            <input matInput matTooltip="ערך ברירת מחדל" formControlName="value" >
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label>נמענים</mat-label>
+            <mat-select formControlName="recipients" multiple matTooltip="נמענים אשר ראשים למלא שדה זה">
+              <mat-option [value]=+0>כולם</mat-option>
+              <mat-option *ngFor="let recipient of form.get('recipient_templates').value" [value]="recipient.number">{{recipient.label}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-checkbox formControlName="required" >שדה חובה</mat-checkbox>
+        </div>
+      </form>
+
+    </div>
+
+  <!-- PDF + formControls -->
+    <div  #pdfContainer 
+      (mousedown)="addInputToForm($event)"
+      (mouseup)="stopResize($event)"
+      (mouseout)="stopResize($event)" 
+      (mousemove)="resizing($event)"
+      id="pdfFormContainer" 
+      >
+
+      <!-- FormControls -->
+      <app-eform-form-group [form]="form" [status]="FORM_STATUS.CREATE"></app-eform-form-group>
+
+        <!-- PDF -->
+      <div>
+        <pdf-viewer 
+          [src]="serviceCreate.pdfSource" 
+          style="display: block; user-select: none;"
+          [zoom]="1.2"
+          (page-rendered)="reLocateReferencePoint()"
+          (after-load-complete)="onPdfLoaded($event)"
+        ></pdf-viewer>
+      </div>
+
+    </div>
+</mat-card>

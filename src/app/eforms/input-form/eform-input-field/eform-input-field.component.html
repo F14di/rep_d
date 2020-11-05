@@ -1,0 +1,11 @@
+<form [formGroup]="form">
+    <ng-container formArrayName="inputs" > 
+        <div  class="absolute input__field"
+            [ngStyle]="{'left':(input.value.x)+'px', 'top':(input.value.y)+'px'}">
+            <ng-content></ng-content>
+        </div>
+    </ng-container>
+</form>
+
+        
+        

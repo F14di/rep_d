@@ -1,0 +1,20 @@
+.nav__container{
+    background-color:#eaeaea;
+    margin-top: 15px;
+    padding:5px 17px;
+    display: flex;
+    justify-content:space-between;
+    align-items: center
+}
+.nav__links{
+    display: flex;
+    align-items:centers;
+}
+.userMenu__icons{
+    margin-left:16px; 
+    margin-right:0
+}
+.active_tab{
+    color:#673ab7;
+    font-weight: 700;
+}

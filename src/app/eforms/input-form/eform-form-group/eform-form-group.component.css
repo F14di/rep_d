@@ -1,0 +1,9 @@
+.input__field{
+    position:absolute;
+    background-color: rgba(140, 151, 250, 0.7);
+    z-index:1
+}
+
+/* .input__field{
+    background-color: rgba(140, 151, 250, 0.7);
+} */
